@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: dc-home-tls-cert
+  namespace: default
+spec:
+  secretName: dc-home-tls-cert
+  commonName: dc.home
+  dnsNames:
+    - dc.home
+  issuerRef:
+    name: home-ca-issuer
+    kind: ClusterIssuer

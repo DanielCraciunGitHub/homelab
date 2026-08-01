@@ -88,3 +88,21 @@ spec:
       name: setup-http
   selector:
     app: adguard
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adguard-ingress
+  namespace: dns-system
+spec:
+  rules:
+    - host: adguard.home
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: adguard-dns
+                port:
+                  name: web-http

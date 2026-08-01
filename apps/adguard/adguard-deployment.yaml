@@ -35,7 +35,7 @@ metadata:
   name: adguard-home
   namespace: dns-system
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: adguard

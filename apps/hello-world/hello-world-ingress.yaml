@@ -8,7 +8,7 @@ spec:
   tls:
     - hosts:
       - dc.home
-    secretName: dc-home-tls-cert
+      secretName: dc-home-tls-cert
   rules:
   - host: dc.home
     http:

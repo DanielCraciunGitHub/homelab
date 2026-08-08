@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: networking-infrastructure
+  name: root-app
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
     targetRevision: HEAD
-    path: infrastructure/networking
+    path: bootstrap/applications
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: metallb-system
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

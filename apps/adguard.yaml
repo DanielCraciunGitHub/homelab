@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: adguard-home
+  name: adguard
   namespace: argocd
 spec:
   project: default

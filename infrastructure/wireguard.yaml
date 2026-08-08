@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wireguard
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+    targetRevision: HEAD
+    path: infrastructure/wireguard
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: wireguard-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

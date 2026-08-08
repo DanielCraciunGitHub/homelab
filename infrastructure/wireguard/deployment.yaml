@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wireguard
+  namespace: wireguard-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wireguard
+  template:
+    metadata:
+      labels:
+        app: wireguard
+    spec:
+      containers:
+        - name: wireguard
+          image: linuxserver/wireguard:latest
+          ports:
+            - containerPort: 51820
+              protocol: UDP
+              name: wireguard-udp
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/London"
+            - name: SERVERURL
+              value: "auto"
+            - name: SERVERPORT
+              value: "51820"
+            - name: PEERS
+              value: "1"
+            - name: PEERDNS
+              value: "auto"
+            - name: INTERNAL_SUBNET
+              value: "10.13.13.0"
+            - name: WIREGUARD_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: wireguard-secret
+                  key: WIREGUARD_PRIVATE_KEY
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_MODULE
+          volumeMounts:
+            - name: wireguard-config
+              mountPath: /config
+            - name: lib-modules
+              mountPath: /lib/modules
+              readOnly: true
+      volumes:
+        - name: wireguard-config
+          emptyDir: {}
+        - name: lib-modules
+          hostPath:
+            path: /lib/modules

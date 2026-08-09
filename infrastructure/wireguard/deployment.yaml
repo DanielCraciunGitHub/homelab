@@ -28,7 +28,7 @@ spec:
             - name: TZ
               value: "Europe/London"
             - name: SERVERURL
-              value: "auto"
+              value: "dcraciun.tplinkdns.com"
             - name: SERVERPORT
               value: "51820"
             - name: PEERS

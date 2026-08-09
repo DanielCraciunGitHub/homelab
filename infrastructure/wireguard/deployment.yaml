@@ -55,7 +55,8 @@ spec:
               readOnly: true
       volumes:
         - name: wireguard-config
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: wireguard-config
         - name: lib-modules
           hostPath:
             path: /lib/modules

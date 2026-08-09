@@ -5,6 +5,7 @@ namespace: wireguard-system
 
 resources:
   - namespace.yaml
+  - pvc.yaml
   - deployment.yaml
   - service.yaml
   - sealed-secret.yaml

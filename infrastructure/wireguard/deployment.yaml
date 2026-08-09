@@ -32,9 +32,9 @@ spec:
             - name: SERVERPORT
               value: "51820"
             - name: PEERS
-              value: "1"
+              value: "phone,laptop"
             - name: PEERDNS
-              value: "auto"
+              value: "192.168.1.201"
             - name: INTERNAL_SUBNET
               value: "10.13.13.0"
             - name: WIREGUARD_PRIVATE_KEY

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: wireguard
-          image: linuxserver/wireguard:latest
+          image: linuxserver/wireguard:1.0.20260223
           ports:
             - containerPort: 51820
               protocol: UDP

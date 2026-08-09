@@ -75,6 +75,7 @@ metadata:
   namespace: dns-system
 spec:
   type: LoadBalancer
+  clusterIP: 10.43.6.74
   ports:
     - port: 53
       targetPort: 53

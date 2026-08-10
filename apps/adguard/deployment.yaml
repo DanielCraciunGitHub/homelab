@@ -75,6 +75,7 @@ metadata:
   namespace: dns-system
 spec:
   type: LoadBalancer
+  loadBalancerIP: 192.168.1.201
   clusterIP: 10.43.6.74
   ports:
     - port: 53

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bluetooth-panel
-          image: ghcr.io/danielcracuingithub/bluetooth-panel:latest
+          image: ghcr.io/DanielCraciunGitHub/bluetooth-panel:latest
           ports:
             - containerPort: 8080
           env:

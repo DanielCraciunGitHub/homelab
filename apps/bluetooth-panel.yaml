@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hello-world
+  name: bluetooth-panel
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
     targetRevision: HEAD
-    path: apps/hello-world
+    path: apps/bluetooth-panel
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default

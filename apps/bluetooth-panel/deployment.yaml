@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluetooth-panel
+spec:
+  replicas: 1  # BT adapter is a singleton resource
+  selector:
+    matchLabels:
+      app: bluetooth-panel
+  template:
+    metadata:
+      labels:
+        app: bluetooth-panel
+    spec:
+      containers:
+        - name: bluetooth-panel
+          image: ghcr.io/danielcracuingithub/bluetooth-panel:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PULSE_SERVER
+              value: "unix:/run/pulse/native"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: dbus-socket
+              mountPath: /run/dbus/system_bus_socket
+            - name: pulse-socket
+              mountPath: /run/pulse/native
+      volumes:
+        - name: dbus-socket
+          hostPath:
+            path: /run/dbus/system_bus_socket
+        - name: pulse-socket
+          hostPath:
+            path: /run/user/1000/pulse/native
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bluetooth-panel-service
+spec:
+  type: ClusterIP
+  selector:
+    app: bluetooth-panel
+  ports:
+    - port: 8080
+      targetPort: 8080

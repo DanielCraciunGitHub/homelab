@@ -64,10 +64,17 @@ spec:
           ports:
             - containerPort: 9586
               name: metrics
+          env:
+            - name: PROMETHEUS_WIREGUARD_EXPORTER_CONFIG_FILE_NAMES
+              value: "/config/wg_confs/wg0.conf"
           securityContext:
             capabilities:
               add:
-                - NET_ADMIN   # needed to run `wg show`
+                - NET_ADMIN
+          volumeMounts:
+            - name: wireguard-config
+              mountPath: /config
+              readOnly: true
       volumes:
         - name: wireguard-config
           persistentVolumeClaim:

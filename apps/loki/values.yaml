@@ -6,6 +6,7 @@
 # ──────────────────────────────────────────────
 loki:
   enabled: true
+  isDefault: false
 
   persistence:
     enabled: true

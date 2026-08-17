@@ -71,6 +71,7 @@ spec:
             - "--prepend_sudo"
             - "false"
           securityContext:
+            runAsUser: 0
             capabilities:
               add:
                 - NET_ADMIN

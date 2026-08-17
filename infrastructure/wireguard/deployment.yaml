@@ -58,6 +58,16 @@ spec:
             - name: lib-modules
               mountPath: /lib/modules
               readOnly: true
+        # Sidecar: exports WireGuard peer stats (handshake times, bytes transferred) to Prometheus
+        - name: wireguard-exporter
+          image: mindflavor/prometheus-wireguard-exporter:3.6.6
+          ports:
+            - containerPort: 9586
+              name: metrics
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN   # needed to run `wg show`
       volumes:
         - name: wireguard-config
           persistentVolumeClaim:

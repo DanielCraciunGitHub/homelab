@@ -67,6 +67,9 @@ spec:
           env:
             - name: PROMETHEUS_WIREGUARD_EXPORTER_CONFIG_FILE_NAMES
               value: "/config/wg_confs/wg0.conf"
+          args:
+            - "--prepend_sudo"
+            - "false"
           securityContext:
             capabilities:
               add:

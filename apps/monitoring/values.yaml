@@ -31,6 +31,39 @@ grafana:
       url: http://loki:3100
       access: proxy
 
+  dashboards:
+    default:
+      # Node Exporter Full — CPU, memory, disk, network per node
+      node-exporter-full:
+        gnetId: 1860
+        revision: 37
+        datasource: Prometheus
+      # Kubernetes cluster overview — pod/node health at a glance
+      kubernetes-cluster:
+        gnetId: 7249
+        revision: 1
+        datasource: Prometheus
+      # Kubernetes workloads — per-namespace CPU/memory breakdown
+      kubernetes-workloads:
+        gnetId: 15757
+        revision: 37
+        datasource: Prometheus
+      # Loki log explorer — search and tail logs from Grafana
+      loki-logs:
+        gnetId: 13639
+        revision: 2
+        datasource: Loki
+      # ArgoCD — app sync status, health, and repo activity
+      argocd:
+        gnetId: 14584
+        revision: 1
+        datasource: Prometheus
+      # Traefik — request rates, latencies, error rates
+      traefik:
+        gnetId: 17346
+        revision: 9
+        datasource: Prometheus
+
 # ──────────────────────────────────────────────
 # Prometheus
 # ──────────────────────────────────────────────

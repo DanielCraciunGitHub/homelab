@@ -1,0 +1,84 @@
+## kube-prometheus-stack values
+## Chart version: 88.3.0
+
+# ──────────────────────────────────────────────
+# Grafana
+# ──────────────────────────────────────────────
+grafana:
+  adminPassword: "cocomimi"   # change if desired
+
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 192.168.1.205
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+    hosts:
+      - grafana.home
+    paths:
+      - /
+
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 512Mi
+
+# ──────────────────────────────────────────────
+# Prometheus
+# ──────────────────────────────────────────────
+prometheus:
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 192.168.1.206
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: traefik
+    hosts:
+      - prometheus.home
+    paths:
+      - /
+
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 4Gi
+    retention: 15d
+
+# ──────────────────────────────────────────────
+# Alertmanager
+# ──────────────────────────────────────────────
+alertmanager:
+  enabled: true
+
+  service:
+    type: ClusterIP   # internal only for now
+
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+
+# ──────────────────────────────────────────────
+# Node exporter + kube-state-metrics (defaults fine)
+# ──────────────────────────────────────────────
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true

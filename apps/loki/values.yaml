@@ -1,0 +1,25 @@
+## loki-stack values
+## Chart version: 2.10.2
+
+# ──────────────────────────────────────────────
+# Loki
+# ──────────────────────────────────────────────
+loki:
+  enabled: true
+
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 10Gi
+
+  service:
+    type: ClusterIP   # internal only — Grafana reaches it via cluster DNS
+
+# ──────────────────────────────────────────────
+# Promtail — DaemonSet that ships logs to Loki
+# ──────────────────────────────────────────────
+promtail:
+  enabled: true
+  config:
+    clients:
+      - url: http://loki:3100/loki/api/v1/push

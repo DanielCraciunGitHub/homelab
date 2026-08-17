@@ -25,6 +25,12 @@ grafana:
     storageClassName: local-path
     size: 512Mi
 
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki:3100
+      access: proxy
+
 # ──────────────────────────────────────────────
 # Prometheus
 # ──────────────────────────────────────────────

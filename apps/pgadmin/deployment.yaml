@@ -12,6 +12,28 @@ spec:
     requests:
       storage: 512Mi
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-config
+  namespace: cnpg-system
+data:
+  servers.json: |
+    {
+      "Servers": {
+        "1": {
+          "Name": "postgres-cluster",
+          "Group": "Servers",
+          "Host": "postgres-cluster",
+          "Port": 5432,
+          "MaintenanceDB": "app",
+          "Username": "postgres",
+          "SSLMode": "prefer",
+          "PassFile": "/pgadmin4/pgpass"
+        }
+      }
+    }
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,10 +69,28 @@ spec:
           volumeMounts:
             - name: pgadmin-data
               mountPath: /var/lib/pgadmin
+            - name: pgadmin-servers
+              mountPath: /pgadmin4/servers.json
+              subPath: servers.json
+              readOnly: true
+            - name: pgadmin-pgpass
+              mountPath: /pgadmin4/pgpass
+              subPath: pgpass
+              readOnly: true
       volumes:
         - name: pgadmin-data
           persistentVolumeClaim:
             claimName: pgadmin-pvc
+        - name: pgadmin-servers
+          configMap:
+            name: pgadmin-config
+        - name: pgadmin-pgpass
+          secret:
+            secretName: postgres-cluster-superuser
+            items:
+              - key: pgpass
+                path: pgpass
+            defaultMode: 0600
 ---
 apiVersion: v1
 kind: Service

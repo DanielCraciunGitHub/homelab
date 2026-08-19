@@ -11,6 +11,10 @@ metadata:
     # SSL Offloading annotation for Argo CD
     nginx.ingress.kubernetes.io/ssl-redirect: "true" 
 spec:
+  tls:
+    - hosts:
+        - argocd.home
+      secretName: homelab-tls
   rules:
     - host: argocd.home
       http:

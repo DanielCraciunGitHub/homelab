@@ -4,6 +4,10 @@ metadata:
   name: adguard-ingress
   namespace: dns-system
 spec:
+  tls:
+    - hosts:
+        - adguard.home
+      secretName: homelab-tls
   rules:
     - host: adguard.home
       http:

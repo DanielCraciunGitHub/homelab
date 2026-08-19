@@ -5,6 +5,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
+  tls:
+    - hosts:
+        - bluetooth.dc.home
+      secretName: homelab-tls
   rules:
   - host: bluetooth.dc.home
     http:

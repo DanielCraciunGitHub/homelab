@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: wireguard-system
 
 resources:
-  - namespace.yaml
   - pvc.yaml
   - deployment.yaml
   - service.yaml
+  - wireguard-metrics-service.yaml
   - monitoring.yaml

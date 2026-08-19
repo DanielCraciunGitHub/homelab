@@ -1,8 +1,8 @@
-# Application Controller — app sync status, health, resource usage
+# Notifications Controller — notification delivery stats
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: argocd-metrics
+  name: argocd-notifications-metrics
   namespace: argocd
   labels:
     release: monitoring
@@ -15,4 +15,4 @@ spec:
       - argocd
   selector:
     matchLabels:
-      app.kubernetes.io/name: argocd-metrics
+      app.kubernetes.io/name: argocd-notifications-controller-metrics

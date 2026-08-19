@@ -34,15 +34,3 @@ spec:
         - name: pulse-socket
           hostPath:
             path: /run/user/1000/pulse/native
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: bluetooth-panel-service
-spec:
-  type: ClusterIP
-  selector:
-    app: bluetooth-panel
-  ports:
-    - port: 8080
-      targetPort: 8080

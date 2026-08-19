@@ -1,0 +1,15 @@
+# ClusterIP Service exposing the wireguard-exporter sidecar metrics port
+apiVersion: v1
+kind: Service
+metadata:
+  name: wireguard-metrics
+  namespace: wireguard-system
+  labels:
+    app: wireguard-metrics
+spec:
+  selector:
+    app: wireguard
+  ports:
+    - name: metrics
+      port: 9586
+      targetPort: 9586

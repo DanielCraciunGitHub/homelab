@@ -1,0 +1,15 @@
+# ClusterIP Service exposing Traefik's metrics port (9100) — not included in the default k3s Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-metrics
+  namespace: kube-system
+  labels:
+    app: traefik-metrics
+spec:
+  selector:
+    app.kubernetes.io/name: traefik
+  ports:
+    - name: metrics
+      port: 9100
+      targetPort: 9100

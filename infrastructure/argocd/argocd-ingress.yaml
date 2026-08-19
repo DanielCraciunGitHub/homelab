@@ -12,7 +12,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true" 
 spec:
   rules:
-    - host: argocd.home
+    - host: argocd.dc.home
       http:
         paths:
           - path: /

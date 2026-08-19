@@ -5,11 +5,10 @@ metadata:
   namespace: kube-system
 spec:
   secretName: homelab-tls
-  commonName: "*.home"
+  commonName: "dc.home"
   dnsNames:
-    - "*.home"
-    - "*.dc.home"
     - "dc.home"
+    - "*.dc.home"
   issuerRef:
     name: home-ca-issuer
     kind: ClusterIssuer

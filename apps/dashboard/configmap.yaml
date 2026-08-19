@@ -10,7 +10,7 @@ data:
       {
         "name": "AdGuard",
         "description": "Network-wide ads & trackers blocking DNS server",
-        "url": "https://adguard.home",
+        "url": "https://adguard.dc.home",
         "icon": "🛡️"
       },
       {
@@ -22,13 +22,13 @@ data:
       {
         "name": "pgAdmin",
         "description": "PostgreSQL database management",
-        "url": "https://pgadmin.home",
+        "url": "https://pgadmin.dc.home",
         "icon": "🐘"
       },
       {
         "name": "ArgoCD",
         "description": "Declarative GitOps continuous delivery tool",
-        "url": "https://argocd.home",
+        "url": "https://argocd.dc.home",
         "icon": "🐙"
       }
     ]

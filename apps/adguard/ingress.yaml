@@ -5,7 +5,7 @@ metadata:
   namespace: dns-system
 spec:
   rules:
-    - host: adguard.home
+    - host: adguard.dc.home
       http:
         paths:
           - path: /

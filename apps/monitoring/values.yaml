@@ -16,7 +16,7 @@ grafana:
     annotations:
       kubernetes.io/ingress.class: traefik
     hosts:
-      - grafana.home
+      - grafana.dc.home
     paths:
       - /
 
@@ -84,7 +84,7 @@ prometheus:
     annotations:
       kubernetes.io/ingress.class: traefik
     hosts:
-      - prometheus.home
+      - prometheus.dc.home
     paths:
       - /
 

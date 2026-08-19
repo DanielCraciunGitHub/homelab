@@ -6,10 +6,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
-  tls:
-    - hosts:
-        - pgadmin.home
-      secretName: homelab-tls
   rules:
     - host: pgadmin.home
       http:

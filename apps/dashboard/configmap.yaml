@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homelab-dashboard-config
+  labels:
+    app: dashboard
+data:
+  config.json: |
+    [
+      {
+        "name": "AdGuard",
+        "description": "Network-wide ads & trackers blocking DNS server",
+        "url": "https://adguard.home",
+        "icon": "🛡️"
+      },
+      {
+        "name": "Bluetooth Panel",
+        "description": "Control local bluetooth devices",
+        "url": "https://bluetooth.dc.home",
+        "icon": "🦷"
+      },
+      {
+        "name": "pgAdmin",
+        "description": "PostgreSQL database management",
+        "url": "https://pgadmin.home",
+        "icon": "🐘"
+      },
+      {
+        "name": "ArgoCD",
+        "description": "Declarative GitOps continuous delivery tool",
+        "url": "https://argocd.home",
+        "icon": "🐙"
+      }
+    ]

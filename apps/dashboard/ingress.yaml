@@ -3,10 +3,8 @@ kind: Ingress
 metadata:
   name: dashboard
   annotations:
-    cert-manager.io/cluster-issuer: "cloudflare-issuer"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: traefik
 spec:
-  ingressClassName: nginx
   tls:
     - hosts:
         - dc.home

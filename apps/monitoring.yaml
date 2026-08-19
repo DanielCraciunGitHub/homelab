@@ -17,6 +17,10 @@ spec:
     - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
       targetRevision: HEAD
       ref: values
+    # Source 3: plain manifests (namespace.yaml) colocated under apps/monitoring/manifests
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      path: apps/monitoring/manifests
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring
@@ -25,5 +29,4 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
       - ServerSideApply=true

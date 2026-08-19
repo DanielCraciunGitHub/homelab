@@ -30,5 +30,11 @@ data:
         "description": "Declarative GitOps continuous delivery tool",
         "url": "https://argocd.dc.home",
         "icon": "🐙"
+      },
+      {
+        "name": "Grafana",
+        "description": "Operational dashboards for your data",
+        "url": "https://grafana.dc.home",
+        "icon": "📊"
       }
     ]

@@ -36,5 +36,11 @@ data:
         "description": "Operational dashboards for your data",
         "url": "https://grafana.dc.home",
         "icon": "📊"
+      },
+      {
+        "name": "n8n",
+        "description": "Workflow automation platform",
+        "url": "https://n8n.dc.home",
+        "icon": "⚡"
       }
     ]

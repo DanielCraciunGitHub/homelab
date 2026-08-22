@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: script-runner
-          image: ghcr.io/danielcraciungithub/script-runner:latest
+          image: ghcr.io/danielcraciungithub/script-runner:0352cab
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

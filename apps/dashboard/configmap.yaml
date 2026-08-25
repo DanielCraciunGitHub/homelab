@@ -8,6 +8,12 @@ data:
   config.json: |
     [
       {
+        "name": "Authentik",
+        "description": "Single Sign-On Identity Provider",
+        "url": "https://authentik.dc.home",
+        "icon": "🔐"
+      },
+      {
         "name": "AdGuard",
         "description": "Network-wide ads & trackers blocking DNS server",
         "url": "https://adguard.dc.home",

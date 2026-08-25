@@ -1,0 +1,68 @@
+## authentik Helm values
+## Chart: goauthentik/authentik  version: 2026.8.0
+
+# ──────────────────────────────────────────────
+# Authentik core configuration
+# ──────────────────────────────────────────────
+authentik:
+  # Read secret_key from the SealedSecret instead of inlining it here
+  existingSecret:
+    secretName: authentik-secret
+
+  # Disable telemetry / sentry error reporting
+  error_reporting:
+    enabled: false
+
+  # Point authentik at the external CNPG postgres-cluster.
+  # The password is read from the SealedSecret via the env var
+  # AUTHENTIK_POSTGRESQL__PASSWORD (set in global.env below).
+  postgresql:
+    host: postgres-cluster-rw.cnpg-system.svc.cluster.local
+    port: 5432
+    name: authentik
+    # 'app' is the CNPG-managed superuser that owns the database
+    user: app
+
+# ──────────────────────────────────────────────
+# Inject PG password from the SealedSecret as
+# the env var authentik reads for its DB password
+# ──────────────────────────────────────────────
+global:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secret
+          key: AUTHENTIK_POSTGRESQL__PASSWORD
+
+# ──────────────────────────────────────────────
+# Disable the bundled PostgreSQL — we use CNPG
+# ──────────────────────────────────────────────
+postgresql:
+  enabled: false
+
+# ──────────────────────────────────────────────
+# Keep the bundled Redis (no existing Redis in cluster)
+# ──────────────────────────────────────────────
+redis:
+  enabled: true
+
+# ──────────────────────────────────────────────
+# Server — ingress via Traefik
+# Matches the pattern used by argocd-ingress.yaml:
+#   annotation: kubernetes.io/ingress.class: traefik
+#   entrypoint: websecure / TLS termination at Traefik
+#   TLS cert: homelab-tls wildcard (*.dc.home) from kube-system TLSStore
+# ──────────────────────────────────────────────
+server:
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+    hosts:
+      - authentik.dc.home
+    # TLS is handled globally by the homelab wildcard TLSStore in kube-system.
+    # No per-ingress tls block needed — Traefik picks up the default cert.

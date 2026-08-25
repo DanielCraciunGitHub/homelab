@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: authentik
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    # Source 1: upstream Authentik Helm chart
+    - repoURL: 'https://charts.goauthentik.io'
+      chart: authentik
+      targetRevision: "2026.8.0"
+      helm:
+        valueFiles:
+          - $values/apps/authentik/values.yaml
+    # Source 2: this Git repo, referenced as $values (for values.yaml above)
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      ref: values
+    # Source 3: raw manifests (namespace, CNPG Database CRD, SealedSecret)
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      path: apps/authentik
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: authentik
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

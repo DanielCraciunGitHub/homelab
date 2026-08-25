@@ -13,22 +13,19 @@ authentik:
   error_reporting:
     enabled: false
 
-  # Point authentik at the external CNPG postgres-cluster.
-  # The password is read from the SealedSecret via the env var
-  # AUTHENTIK_POSTGRESQL__PASSWORD (set in global.env below).
-  postgresql:
-    host: postgres-cluster-rw.cnpg-system.svc.cluster.local
-    port: 5432
-    name: authentik
-    # 'app' is the CNPG-managed superuser that owns the database
-    user: app
-
 # ──────────────────────────────────────────────
-# Inject PG password from the SealedSecret as
-# the env var authentik reads for its DB password
+# Global Environment Variables
 # ──────────────────────────────────────────────
 global:
   env:
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: "postgres-cluster-rw.cnpg-system.svc.cluster.local"
+    - name: AUTHENTIK_POSTGRESQL__PORT
+      value: "5432"
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: "authentik"
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: "app"
     - name: AUTHENTIK_SECRET_KEY
       valueFrom:
         secretKeyRef:

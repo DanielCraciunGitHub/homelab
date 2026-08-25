@@ -22,7 +22,7 @@ spec:
             - sh
             - -c
             - |
-              cp /secret/pgpass /pgpass-fixed/pgpass
+              awk -F: -v OFS=: '{$3="*"; print}' /secret/pgpass > /pgpass-fixed/pgpass
               chmod 0600 /pgpass-fixed/pgpass
               chown 5050 /pgpass-fixed/pgpass
           volumeMounts:

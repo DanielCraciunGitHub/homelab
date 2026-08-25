@@ -29,6 +29,11 @@ authentik:
 # ──────────────────────────────────────────────
 global:
   env:
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secret
+          key: secret_key
     - name: AUTHENTIK_POSTGRESQL__PASSWORD
       valueFrom:
         secretKeyRef:

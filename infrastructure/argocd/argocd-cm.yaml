@@ -14,3 +14,34 @@ data:
     clientID: R4fkHEIwJIUDUIQN2Fe7EMnWJI3o12QMMKswbjg1
     clientSecret: $oidc.authentik.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
+    rootCA: |
+      -----BEGIN CERTIFICATE-----
+      MIIFDzCCAvegAwIBAgIUca6ycVjqc8o96Mo4pZyQQloplYowDQYJKoZIhvcNAQEL
+      BQAwFzEVMBMGA1UEAwwMSG9tZSBSb290IENBMB4XDTI2MDgwMTEwMDkwNFoXDTM2
+      MDcyOTEwMDkwNFowFzEVMBMGA1UEAwwMSG9tZSBSb290IENBMIICIjANBgkqhkiG
+      9w0BAQEFAAOCAg8AMIICCgKCAgEAyZv3P9E30dzPkkModrBx09n3yX+Z9p7itbW4
+      +OGkqmUPqwOInzPDv22YnKqu7KlMZ8lA5t1HdawQEV5229A8i1OfXOmf2RrIUU0y
+      80DSW+bbH3BhL1ystRbKMbD0LpucnRTKiUqdCQmOnwWkPH/EeooPJr8F276JemoS
+      ZVuCVPgEU6eYyYzx6wUo6Aq8a1tgDnFWQbj8RbUed3eI0BMIc2nWMxUiFZhfG2PH
+      LkTDBiQJxrXKsvepPTgEOeKLzNfqpbGL+GTpBwZg/d6/w/vZ7ipTcXn1fFG6UuGM
+      GNpfyWnpLJ5kznKdLLgwpkzDkqpAzyeMWDKj8K+QvV/wEXv+UbT5pSRHQ/bi83XC
+      YxT0LStPZXX6+BBYUsGLjLfj4zeF6xYKlxEu2KGe2Ty3ggCnKxt1D3fYgupl/oMy
+      8RPCfYHDMDwEJGdN/Mo16a8/6ZkdEgi1aK/ORlBuniYHr3UqSRazyr2h46iKYwXX
+      vi5OHJTTrutvzFGmEV0mLp96j6X6hHuLhzvdqUUUv5/xh8A8oGau7046h+3oWAXt
+      qte9pvn2kW8tWN1pInBgtGdgclJAdocOxy/3V2OZglCb17S7Hs9uXmaNfu9nIR4W
+      XhEPkF/HOsytDeoJbWCTXYiWc3/5jDDfFibJQ5/YQXDpD2+aOy9NchJON5kxjB4i
+      YEWenncCAwEAAaNTMFEwHQYDVR0OBBYEFJB/tYhG0NMAW69wFNUGHe/h9CLmMB8G
+      A1UdIwQYMBaAFJB/tYhG0NMAW69wFNUGHe/h9CLmMA8GA1UdEwEB/wQFMAMBAf8w
+      DQYJKoZIhvcNAQELBQADggIBAGriV5y2/94uONxpQsVYyjYrkJHqen+O2+cMSaPp
+      yGDiT5Os7RAqYYaKME6ZIppl8vmhVuq3Q/8nVLs5TYZ9uw/W3ZaHNUz8JGYnJ2Wr
+      M8trCIZQdyqIHESAc4KFiYQA6c41XCndX5JNlO7+LGNcblU+vmb2WGnFmZcuZvVk
+      sqTMtYqjq6lcotgkBwN1h0ck3sJG7zA7rhZTrJXtp8q8m7ePT9wUvxL/wMrmMJan
+      T3eqQMra+keYInvAgfoiaq1BJX9lBOuoDV2k4eOlpwtLexVY1iAIqz99syPnFIbs
+      cXc15Sjac5XsFMkEStQ+bsHNhkLBfXT7icXy0ks3ThV3pUQiFWBGuGyLgym7BLgr
+      cD47IfY2BiFHY7CDySpRKnn58ZaVGEFvTHMbcf4rzFLushIcCdHY0/HjukuDWcWm
+      dZiXwQgojBq1wbAi6Kowv4gZtdfRLebv7468GGeh5cxAyjC1EkA2ZL9QmTmjEebS
+      O7PSIZI9aio0EZc5ewRjO9ThTtxSfkVEfEZPAT68Q6ys+NOYu52Xs1yNaHuHiLPy
+      9fBt2FP7SI14pAUJwqX84ZD9ExftQ6w2qW97sQm+nFMYigHhOc7CmQS8sCcE+SCU
+      OkbtGAvVH4DL15xoKJWjbjjojSzG95QcHHgJT6/wZVAv7UweArxzNTvLwBKMh0c/
+      Z9zn
+      -----END CERTIFICATE-----

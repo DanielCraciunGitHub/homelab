@@ -1,3 +1,8 @@
 keys
 
 **/*.sh
+
+# SOPS VS Code Extension Temporary Files
+.decrypted~*
+
+age.agekey

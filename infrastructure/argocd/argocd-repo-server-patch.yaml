@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+  namespace: argocd
+
+spec:
+  template:
+    spec:
+      volumes:
+        - name: cmp-sops
+          configMap:
+            name: cmp-sops
+
+        - name: sops-age
+          secret:
+            secretName: sops-age
+
+        - name: cmp-tmp
+          emptyDir: {}
+
+        - name: sops-tool
+          emptyDir: {}
+
+      initContainers:
+        - name: install-sops
+          image: alpine:3.18
+          command: [sh, -c]
+          args:
+            - |
+              set -e
+
+              apk add --no-cache wget tar
+
+              # Install SOPS
+              wget -qO /custom-tools/sops \
+                https://github.com/getsops/sops/releases/download/v3.8.1/sops-v3.8.1.linux.amd64
+
+              chmod +x /custom-tools/sops
+
+              # Install Kustomize
+              wget -qO /tmp/kustomize.tar.gz \
+                https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v5.3.0/kustomize_v5.3.0_linux_amd64.tar.gz
+
+              tar -xzf /tmp/kustomize.tar.gz \
+                -C /custom-tools
+
+              chmod +x /custom-tools/kustomize
+
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: sops-tool
+
+      containers:
+        - name: cmp-sops
+          image: alpine:3.18
+
+          command:
+            - /var/run/argocd/argocd-cmp-server
+
+          env:
+            - name: SOPS_AGE_KEY_FILE
+              value: /sops-age/keys.txt
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+
+          volumeMounts:
+            - mountPath: /var/run/argocd
+              name: var-files
+
+            - mountPath: /home/argocd/cmp-server/plugins
+              name: plugins
+
+            - mountPath: /tmp
+              name: cmp-tmp
+
+            - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+              subPath: plugin.yaml
+              name: cmp-sops
+
+            - mountPath: /usr/local/bin/sops
+              name: sops-tool
+              subPath: sops
+
+            - mountPath: /usr/local/bin/kustomize
+              name: sops-tool
+              subPath: kustomize
+
+            - mountPath: /sops-age
+              name: sops-age
+              readOnly: true

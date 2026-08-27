@@ -5,11 +5,12 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.1/manifests/install.yaml
   - namespace.yaml
   - argocd-ingress.yaml
-  - argocd-oidc-sealed-secret.yaml
+  - oidc-secret.sops.yaml
   - argocd-servicemonitors.yaml
   - argocd-server-metrics-servicemonitor.yaml
   - argocd-repo-server-servicemonitor.yaml
   - argocd-notifications-servicemonitor.yaml
+  - sops-cmp.yaml
 
 patches:
   - path: argocd-config.yaml
@@ -24,3 +25,7 @@ patches:
     target:
       kind: ConfigMap
       name: argocd-rbac-cm
+  - path: argocd-repo-server-patch.yaml
+    target:
+      kind: Deployment
+      name: argocd-repo-server

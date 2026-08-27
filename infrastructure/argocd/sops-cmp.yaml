@@ -12,21 +12,21 @@ data:
     spec:
       version: v1.0
 
-    discover:
-      find:
+      discover:
+        find:
+          command:
+            - sh
+            - -c
+            - |
+              find . -maxdepth 1 -name '*.sops.yaml' -print -quit | grep -q .
+
+      generate:
         command:
           - sh
           - -c
           - |
-            find . -maxdepth 1 -name '*.sops.yaml' -print -quit | grep -q .
+            set -e
 
-    generate:
-      command:
-        - sh
-        - -c
-        - |
-          set -e
+            find . -maxdepth 1 -name '*.sops.yaml' -exec sops -d -i {} \;
 
-          find . -maxdepth 1 -name '*.sops.yaml' -exec sops -d -i {} \;
-
-          kustomize build .
+            kustomize build .

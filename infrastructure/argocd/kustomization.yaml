@@ -5,7 +5,6 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.1/manifests/install.yaml
   - namespace.yaml
   - argocd-ingress.yaml
-  - oidc-secret.sops.yaml
   - argocd-servicemonitors.yaml
   - argocd-server-metrics-servicemonitor.yaml
   - argocd-repo-server-servicemonitor.yaml

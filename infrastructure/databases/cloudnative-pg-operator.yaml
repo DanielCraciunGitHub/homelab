@@ -8,12 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/cloudnative-pg/cloudnative-pg.git'
+    repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
     targetRevision: main
-    path: releases/
-    directory:
-      recurse: false
-      include: 'cnpg-1.30.0.yaml'
+    path: infrastructure/databases/cloudnative-pg
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: cnpg-system
@@ -24,6 +21,4 @@ spec:
     syncOptions:
       - ServerSideApply=true
       - CreateNamespace=true
-    managedNamespaceMetadata:
-      labels:
-        istio.io/dataplane-mode: ambient
+

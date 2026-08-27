@@ -12,6 +12,10 @@ resources:
   - argocd-notifications-servicemonitor.yaml
 
 patches:
+  - path: argocd-config.yaml
+    target:
+      kind: ConfigMap
+      name: argocd-cmd-params-cm
   - path: argocd-cm.yaml
     target:
       kind: ConfigMap

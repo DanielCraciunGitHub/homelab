@@ -11,7 +11,7 @@ spec:
     path: apps/bluetooth-panel
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: default
+    namespace: bluetooth-panel
   syncPolicy:
     automated:
       prune: true

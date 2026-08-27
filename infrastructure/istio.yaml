@@ -11,6 +11,10 @@ spec:
     repoURL: 'https://istio-release.storage.googleapis.com/charts'
     chart: base
     targetRevision: "1.30.4"
+    helm:
+      parameters:
+        - name: base.validationFailurePolicy
+          value: Fail
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: istio-system
@@ -36,6 +40,8 @@ spec:
       parameters:
         - name: profile
           value: ambient
+        - name: base.validationFailurePolicy
+          value: Fail
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: istio-system

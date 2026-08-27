@@ -67,6 +67,10 @@ spec:
       parameters:
         - name: profile
           value: ambient
+        - name: cniBinDir
+          value: /var/lib/rancher/k3s/data/current/bin
+        - name: cniConfDir
+          value: /var/lib/rancher/k3s/agent/etc/cni/net.d
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: kube-system

@@ -3,4 +3,12 @@ kind: Kustomization
 
 resources:
   - https://github.com/cloudnative-pg/cloudnative-pg/releases/download/v1.30.0/cnpg-1.30.0.yaml
-  - namespace.yaml
+
+patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: cnpg-system
+        labels:
+          istio.io/dataplane-mode: ambient

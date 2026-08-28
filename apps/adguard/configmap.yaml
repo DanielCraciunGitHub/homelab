@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: adguard-dns-rewrites
+  namespace: dns-system
+data:
+  rewrites.yaml: |
+    dns:
+      rewrites:
+        - domain: '*.dc.home'
+          answer: '192.168.1.200'
+          enabled: true
+      upstream_dns:
+        - 1.1.1.1
+        - 1.0.0.1

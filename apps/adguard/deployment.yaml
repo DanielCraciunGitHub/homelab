@@ -13,6 +13,26 @@ spec:
       labels:
         app: adguard
     spec:
+      initContainers:
+        - name: init-adguard-config
+          image: mikefarah/yq:4
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              if [ ! -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+                echo "AdGuardHome.yaml not found, skipping GitOps config merge."
+                exit 0
+              fi
+              echo "Merging GitOps configuration into AdGuardHome.yaml..."
+              yq eval-all 'select(fileIndex == 0) *d select(fileIndex == 1)' /opt/adguardhome/conf/AdGuardHome.yaml /tmp/gitops-config/rewrites.yaml > /opt/adguardhome/conf/AdGuardHome.tmp
+              mv /opt/adguardhome/conf/AdGuardHome.tmp /opt/adguardhome/conf/AdGuardHome.yaml
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: adguard-conf
+              mountPath: /opt/adguardhome/conf
+            - name: gitops-config
+              mountPath: /tmp/gitops-config
       containers:
         - name: adguard
           image: adguard/adguardhome:v0.107.79
@@ -36,3 +56,6 @@ spec:
         - name: adguard-work
           persistentVolumeClaim:
             claimName: adguard-work-pvc
+        - name: gitops-config
+          configMap:
+            name: adguard-dns-rewrites

@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://charts.longhorn.io'
+      chart: longhorn
+      targetRevision: 1.8.2
+      helm:
+        parameters:
+          - name: persistence.defaultClass
+            value: "true"
+          - name: persistence.defaultClassReplicaCount
+            value: "1" # Assuming 1 node homelab for simplicity, will adjust if needed.
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      path: infrastructure/longhorn
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: longhorn-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

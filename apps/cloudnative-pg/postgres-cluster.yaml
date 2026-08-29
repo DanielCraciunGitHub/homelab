@@ -8,4 +8,4 @@ spec:
   primaryUpdateMethod: switchover
   storage:
     size: 5Gi
-    storageClass: local-path
+    storageClass: longhorn

@@ -22,7 +22,7 @@ grafana:
 
   persistence:
     enabled: true
-    storageClassName: local-path
+    storageClassName: longhorn
     size: 512Mi
 
 
@@ -92,7 +92,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: local-path
+          storageClassName: longhorn
           accessModes:
             - ReadWriteOnce
           resources:
@@ -113,7 +113,7 @@ alertmanager:
     storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: local-path
+          storageClassName: longhorn
           accessModes:
             - ReadWriteOnce
           resources:

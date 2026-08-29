@@ -6,3 +6,5 @@ keys
 .decrypted~*
 
 age.agekey
+
+*.sql

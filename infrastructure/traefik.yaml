@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: 'https://traefik.github.io/charts'
+      targetRevision: 41.4.0
+      chart: traefik
+      helm:
+        values: |
+          deployment:
+            replicas: 1
+          providers:
+            kubernetesCRD:
+              enabled: true
+              allowEmptyServices: true
+            kubernetesIngress:
+              enabled: true
+              allowEmptyServices: true
+              publishedService:
+                enabled: true
+          ingressClass:
+            enabled: true
+            isDefaultClass: true
+            name: traefik
+          ports:
+            web:
+              port: 8000
+              expose: true
+              exposedPort: 80
+              redirectTo:
+                port: websecure
+            websecure:
+              port: 8443
+              expose: true
+              exposedPort: 443
+              tls:
+                enabled: true
+          service:
+            spec:
+              loadBalancerIP: 192.168.1.210
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      path: infrastructure/traefik
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: traefik-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -7,6 +7,9 @@ data:
   rewrites.yaml: |
     dns:
       rewrites:
+        - domain: 'dashboard.dc.home'
+          answer: '192.168.1.210'
+          enabled: true
         - domain: '*.dc.home'
           answer: '192.168.1.200'
           enabled: true

@@ -29,16 +29,22 @@ spec:
           ports:
             web:
               port: 8000
-              expose: true
+              expose:
+                default: true
               exposedPort: 80
-              redirectTo:
-                port: websecure
+              http:
+                redirections:
+                  entryPoint:
+                    to: websecure
+                    scheme: https
             websecure:
               port: 8443
-              expose: true
+              expose:
+                default: true
               exposedPort: 443
-              tls:
-                enabled: true
+              http:
+                tls:
+                  enabled: true
           service:
             spec:
               loadBalancerIP: 192.168.1.210

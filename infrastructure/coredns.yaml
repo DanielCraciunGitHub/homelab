@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coredns
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://coredns.github.io/helm'
+    targetRevision: 1.36.1
+    chart: coredns
+    helm:
+      values: |
+        isClusterService: true
+        serviceType: ClusterIP
+        service:
+          clusterIP: 10.43.0.10
+        servers:
+        - zones:
+          - zone: dc.home
+          port: 53
+          plugins:
+          - name: errors
+          - name: cache
+            parameters: 30
+          - name: forward
+            parameters: . 192.168.1.201
+        - zones:
+          - zone: .
+            use_tcp: true
+          port: 53
+          plugins:
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 10s
+          - name: ready
+          - name: kubernetes
+            parameters: cluster.local in-addr.arpa ip6.arpa
+            configBlock: |-
+              pods insecure
+              fallthrough in-addr.arpa ip6.arpa
+              ttl 30
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: cache
+            parameters: 30
+          - name: loop
+          - name: reload
+          - name: loadbalance
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -17,6 +17,7 @@ spec:
             kubernetesCRD:
               enabled: true
               allowEmptyServices: true
+              defaultTLSResourcesNamespace: traefik-system
             kubernetesIngress:
               enabled: true
               allowEmptyServices: true

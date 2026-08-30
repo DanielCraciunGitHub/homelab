@@ -7,7 +7,6 @@ metadata:
     metallb.universe.tf/allow-shared-ip: jellyfin
 spec:
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.202
   ports:
     - port: 8096
       targetPort: 8096

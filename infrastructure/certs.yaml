@@ -5,10 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
-    targetRevision: HEAD
-    path: infrastructure/certs
+  sources:
+    - repoURL: 'https://charts.jetstack.io'
+      targetRevision: v1.15.3
+      chart: cert-manager
+      helm:
+        values: |
+          installCRDs: true
+    - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
+      targetRevision: HEAD
+      path: infrastructure/certs
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: cert-manager

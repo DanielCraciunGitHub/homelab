@@ -34,7 +34,7 @@ spec:
             - name: PEERS
               value: "phone,laptop"
             - name: PEERDNS
-              value: "192.168.1.201"
+              value: "192.168.122.201"
             - name: INTERNAL_SUBNET
               value: "10.13.13.0"
             - name: POSTUP

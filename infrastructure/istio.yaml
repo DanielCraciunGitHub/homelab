@@ -64,13 +64,10 @@ spec:
     chart: cni
     targetRevision: "1.30.4"
     helm:
-      parameters:
-        - name: profile
-          value: ambient
-        - name: cniBinDir
-          value: /var/lib/rancher/k3s/data/cni
-        - name: cniConfDir
-          value: /var/lib/rancher/k3s/agent/etc/cni/net.d
+      valuesObject:
+        ambient:
+          enabled: true
+        chained: true
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: kube-system

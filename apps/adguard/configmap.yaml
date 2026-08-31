@@ -8,7 +8,7 @@ data:
     dns:
       rewrites:
         - domain: '*.dc.home'
-          answer: '192.168.1.200'
+          answer: '192.168.122.200'
           enabled: true
       upstream_dns:
         - 1.1.1.1

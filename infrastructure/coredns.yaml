@@ -24,7 +24,7 @@ spec:
           - name: cache
             parameters: 30
           - name: forward
-            parameters: . 192.168.1.201
+            parameters: . 192.168.122.201
         - zones:
           - zone: .
             use_tcp: true

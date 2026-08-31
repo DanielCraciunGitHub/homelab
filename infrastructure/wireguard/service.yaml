@@ -4,7 +4,7 @@ metadata:
   name: wireguard
   namespace: wireguard-system
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.203
+    metallb.universe.tf/loadBalancerIPs: 192.168.122.202
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local

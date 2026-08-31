@@ -55,7 +55,7 @@ spec:
                   release: monitoring
           service:
             annotations:
-              metallb.universe.tf/loadBalancerIPs: 192.168.1.200
+              metallb.universe.tf/loadBalancerIPs: 192.168.122.200
     - repoURL: 'https://github.com/DanielCraciunGitHub/homelab.git'
       targetRevision: HEAD
       path: infrastructure/traefik

@@ -11,7 +11,7 @@ data:
   oidc.config: |
     name: Authentik
     issuer: https://authentik.dc.home/application/o/argocd/
-    clientID: R4fkHEIwJIUDUIQN2Fe7EMnWJI3o12QMMKswbjg1
+    clientID: 84Ll7P6CXDSUGTGwztdUElBLzlSdFancZHLHG9qP
     clientSecret: $argocd-oidc-secret:oidc.authentik.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     rootCA: |
